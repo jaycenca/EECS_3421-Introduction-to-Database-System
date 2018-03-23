@@ -1,0 +1,41 @@
+with 
+    Minimum (login, realm, min) as 
+                             ( select login,realm ,min(day)
+                               from Visit 
+                               group by login, realm
+                               order by realm
+                             ), 
+    
+    Maximum (login, realm, max) as 
+                             ( select login, realm, max(day) 
+                               from Visit 
+                               group by login, realm 
+                               order by realm
+                             ),
+   
+    CountDays(login, realm, countDay) as 
+                             ( select Ma.login, Ma.realm, Days(Ma.max) - Days(Mn.min)
+                               from Maximum Ma, Minimum Mn
+                               where Ma.login = Mn.login 
+                                 and Ma.realm = Mn.realm 
+                               order by login, realm
+                             ),
+ 
+    CountVisit(login, realm, #visit) as 
+                             ( select V.login, V.realm, count(V.login) as #visit          
+                               from Visit V
+                               group by V.login, V.realm
+                              ),
+   
+    Range(login, realm, #visit, range, frequency) as
+                             ( select CV.login, CV.realm, CV.#visit, CD.countDay, cast((decfloat(CD.countDay)) / (decfloat(CV.#visit - 1  )) as decimal(5,2))
+                               from CountDays CD, CountVisit CV
+                               where CD.login = CV.login 
+                                 and CD.realm = CV.realm
+                               group by CV.login, CV.realm, CV.#visit, CD.countDay
+                               having CV.#visit > 1
+                              )
+
+select login, realm, #visit, range, frequency
+from Range
+order by login, realm;

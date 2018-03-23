@@ -1,0 +1,8 @@
+db2 connect to c3421a
+db2 -tvf myself
+db2 -tvf evening
+db2 -tvf thrice
+db2 -tvf gender
+db2 -tvf swap.sql
+db2 -tvf both
+db2 -tvf success;

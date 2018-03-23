@@ -1,0 +1,18 @@
+with 
+    CountAvatar(theme, login, avatar, race, sql) as 
+                                       (select L.theme, L.login, A.name as avatar, A.race, T.sql
+                                        from Loot L, Avatar A, Treasure T, Player P
+                                        where L.login = P.login
+                                          and P.login = A.login 
+                                          and L.treasure = T.treasure 
+                                      )
+ 
+select S.theme, S.race, sum(S.sql) as total 
+from CountAvatar S 
+where (S.race, S.login, S.avatar) not in 
+                      (select S2.race, S2.login, S2.avatar 
+                       from CountAvatar S2 
+                       where S.login = S2.login
+                         and S.avatar <> S2.avatar                                   
+                      )
+group by S.theme, S.race;

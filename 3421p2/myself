@@ -1,0 +1,4 @@
+select login, name, gender, address, joined
+from Player
+where upper(name) like '%' || upper(login) || '%'
+ORDER BY login asc;

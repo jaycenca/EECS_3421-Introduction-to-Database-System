@@ -1,0 +1,56 @@
+with 
+    One ( login , gender, avatars) as 
+                      ( select P.login, P.gender, A.gender as avatars
+                        from Player P, Avatar A
+                        where P.login = A.login 
+                          and P.gender <> A.gender
+                       ), 
+    Both ( login, gender, avatars) as 
+                      ( select distinct P.login, P.gender, 'both'
+                         from Player P, Avatar A
+                         where P.login = A.login 
+                           and (P.login, P.gender) in ( 
+                                               select O.login, O.gender 
+                                               from One O) 
+                       ), 
+    Female (login, gender, avatars) as 
+                        ( select distinct P.login, 'female' as gender, 'female' as avatars
+			  from Player P, Avatar A
+                          where P.login = A.login 
+                            and A.gender = 'F' 
+                            and (P.login, P.gender) not in (
+                                                select O.login, O.gender
+                                                from One O )
+                        ), 
+    Male (login, gender, avatars) as 
+                       ( select distinct P.login, 'male' as gender, 'male' as avatars
+                         from Player P, Avatar A
+                         where P.login = A.login 
+                           and A.gender = 'M' 
+                           and (P.login, P.gender) not in (
+                                              select O.login, O.gender
+                                              from One O )
+                       ) 
+
+select login, 'female' as gender, avatars 
+from Both 
+where gender = 'F'
+
+union all 
+
+select login, 'male' as gender, avatars
+from Both 
+where gender = 'M'
+
+union all 
+ 
+select login, gender, avatars
+from Female
+ 
+union all 
+ 
+select login, gender, avatars
+from Male
+
+order by login;
+
