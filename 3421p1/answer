@@ -1,0 +1,41 @@
+ 
+ 
+select E.title, E.air_date, A.aname as actor, C.cname as character, C.role, Stars.salary from Episode as E, Season as S, Features as F, Actor as A, Character as C, Portrayal as P, Stars where rating > 3 and E.title = F.title and E.num = S.num and E.series_name = S.series_name and E.creator = S.creator and A.aname = P.aname and C.cname = P.cname and A.aname = Stars.aname and S.num = Stars.num and S.series_name = Stars.series_name and S.creator = Stars.creator and P.cname = F.cname and P.aname = F.aname and Stars.num = F.num and Stars.series_name = F.series_name and Stars.creator = F.creator ORDER BY E.air_date, E.title, A.aname, C.cname
+
+TITLE                AIR_DATE   ACTOR                CHARACTER            ROLE                 SALARY     
+-------------------- ---------- -------------------- -------------------- -------------------- -----------
+Alone                10/09/2015 John Malkovich       John                 the one                    99999
+Together             10/16/2015 John Malkovich       John                 the one                    99999
+Hooking up           09/09/2016 Jennifer Lawrence    Veronica             staid friend              250000
+Hooking up           09/09/2016 Josh Hutcherson      Cameron              sardonic friend           150000
+Hooking up           09/09/2016 Mindy Kaling         Paige                whimsical friend          200000
+Hooking up           09/09/2016 Richard Ayoade       Moss                 geeky friend               75000
+Prohibition          09/16/2016 Allie Grant          Issy                 the user                  150000
+Prohibition          09/16/2016 Justin Kirk          Ned                  the enabler               275000
+Prohibition          09/16/2016 Mary-Louise Parker   Andi                 the pusher                275000
+The Lazy Amazon      09/23/2016 Jennifer Lawrence    Veronica             staid friend              250000
+The Lazy Amazon      09/23/2016 Josh Hutcherson      Cameron              sardonic friend           150000
+The Lazy Amazon      09/23/2016 Mindy Kaling         Paige                whimsical friend          200000
+The Munchies         09/30/2016 Allie Grant          Issy                 the user                  150000
+The Munchies         09/30/2016 Justin Kirk          Ned                  the enabler               275000
+The Munchies         09/30/2016 Mary-Louise Parker   Andi                 the pusher                275000
+The Solipsist        10/07/2016 John Malkovich       John                 the one                   249999
+Au Revoir            04/28/2017 John Malkovich       John                 the one                   249999
+Tangerine Skies      09/08/2017 Allie Grant          Veronica             staid friend              175000
+Tangerine Skies      09/08/2017 Britt Robertson      Veronica             staid friend              200000
+Tangerine Skies      09/08/2017 Josh Hutcherson      Cameron              sardonic friend           150000
+Tangerine Skies      09/08/2017 Mindy Kaling         Paige                whimsical friend          350000
+Tangerine Skies      09/08/2017 Richard Ayoade       Moss                 geeky friend              225000
+Cameron Blues        09/15/2017 Josh Hutcherson      Cameron              sardonic friend           150000
+Cameron Blues        09/15/2017 Richard Ayoade       Moss                 geeky friend              225000
+All good             09/22/2017 Allie Grant          Issy                 the user                  100000
+All good             09/22/2017 Justin Kirk          Ned                  the enabler               325000
+All good             09/22/2017 Justin Kirk          Shane                the outsider              325000
+All good             09/22/2017 Mary-Louise Parker   Andi                 the pusher                325000
+Toke Bespoke         09/29/2017 Allie Grant          Issy                 the user                  100000
+Toke Bespoke         09/29/2017 Justin Kirk          Ned                  the enabler               325000
+Toke Bespoke         09/29/2017 Mary-Louise Parker   Andi                 the pusher                325000
+
+  31 record(s) selected.
+
+
