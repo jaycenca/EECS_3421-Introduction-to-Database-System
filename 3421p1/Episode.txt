@@ -1,0 +1,32 @@
+PROJECT EPISODE: 
+
+Objectives: 1) develop an Entity-Relationship Diagram using given informations 
+            2) create the relational schemas using Entity/Relationship (ER) design 
+            2) insert sample data into the Data Definition Schema to populate relational tables 
+            3) execute SQL queries to visualize the relational schema 
+
+The Episodes Domain: 
+           A TV production behemoth NetPix wants to design a database that stores information about TV series. 
+           The database should be design using the following informations: 
+           
+           A SERIES is identified by its name and creator; it is possible that two series were created with the same name, but not also with the same creator. 
+           Each series should also have information about its start date, end date, and website. A series has many characters, as well as many episodes.
+           A series has many characters as well as many episodes.
+
+           A EPISODE is identified --- for a given series --- by its title. 
+           It also store information per episode about its quality rating, initial air date, the season it is in, a description and a multimedia URL.
+          
+           A CHARACTER is identified --- within a given series --- by his or her (or its) name; 
+           It also store information about the role that he or she played.
+           Characters are featured in episodes. Characters are usually played by actors.
+           Note that a given character can be played by different actors through the series and a single actor can play more than one character in a series. 
+           These actors star in series. Actors have unique names and some have websites.
+
+           
+           
+           
+
+
+
+
+

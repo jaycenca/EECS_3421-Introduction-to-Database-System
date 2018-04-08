@@ -1,0 +1,4 @@
+select sum(T.sql) as Total
+from Loot L, Treasure T
+where L.treasure = T.treasure
+  and L.login is not null;

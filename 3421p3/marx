@@ -1,0 +1,35 @@
+--#set delimiter ! 
+-- ============================================================================
+ECHO Making table Reassigned . !
+
+CREATE TABLE Reassigned (
+	donor       varchar(15) not null,
+	recipient   varchar(15) not null,
+        day         Date        not null,
+        realm       varchar(15) not null,
+        theme       varchar(15) not null,
+        loot#       int         not null,
+        treasure    varchar(20) not null,
+        sql         int         not null,
+        constraint Reassigned_PK 
+            primary key (donor, recipient, day, realm, theme)
+)!
+
+-- ===========================================================================
+ECHO CREATE TRIGGER MARX!
+CREATE TRIGGER marx
+after update of login on Loot
+REFERENCING 
+     OLD  as old
+     NEW  as new
+for each row 
+INSERT INTO Reassigned (donor, recipient, day, realm, theme, loot#, treasure, sql)
+      VALUES(old.login, new.login, new.day, new.realm, new.theme, new.loot#, new.treasure, 
+                                                     (select sql 
+                                                      from Treasure T
+                                                      where T.treasure = new.treasure))!
+   
+
+
+
+
